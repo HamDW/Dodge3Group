@@ -42,6 +42,12 @@ public class ParserTestDlg : MonoBehaviour
         ParsingTest();
     }
 
+    public void OnClicked_Clear()
+    {
+        m_txtResult.text = "";
+        m_listItem.Clear();
+    }
+
     private void LoadingTest()
     {
         m_listItem.Clear();
@@ -53,7 +59,7 @@ public class ParserTestDlg : MonoBehaviour
         for (int i = 0; i < dataList.Count; i++)
         {
             string[] data = dataList[i];
-            sResult += string.Format("{0}, {1}, {2} \n", data[0], data[1], data[2]);
+            sResult += string.Format("{0}, {1}, {2}\n", data[0], data[1], data[2]);
         }
         m_txtResult.text = sResult;
     }
@@ -96,11 +102,7 @@ public class ParserTestDlg : MonoBehaviour
         m_txtResult.text = kBuilder.ToString();
     }
 
-    public void OnClicked_Clear()
-    {
-        m_txtResult.text = "";
-        m_listItem.Clear();
-    }
+  
 
 
 
