@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
@@ -41,6 +42,52 @@ public class FileSave
 
         br.Close();
         fs.Close();
+        return true;
+    }
+}
+
+
+public class FileSave2
+{
+    Action<BinaryReader> onRead = null;
+    Action<BinaryWriter> onWrite = null;
+
+    public bool SaveFile(string sPathName, Action<BinaryWriter> func)
+    {
+        onWrite = func;
+
+        FileStream fs = new FileStream(sPathName, FileMode.Create, FileAccess.Write);
+        BinaryWriter bw = new BinaryWriter(fs);
+
+        if (onWrite != null)
+            onWrite(bw);
+
+        bw.Close();
+        fs.Close();
+
+        return true;
+    }
+
+    public bool LoadFile(string sPathName, Action<BinaryReader> func)
+    {
+        onRead = func;
+
+        try
+        {
+            FileStream fs = new FileStream(sPathName, FileMode.Open, FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+
+            if (onRead != null)
+                onRead(br);
+
+            br.Close();
+            fs.Close();
+        }
+        catch(Exception e)
+        {
+            Debug.Log("File Err : " + e.ToString());            
+        }
+
         return true;
     }
 }
