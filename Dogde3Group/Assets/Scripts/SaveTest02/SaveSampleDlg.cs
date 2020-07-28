@@ -23,7 +23,7 @@ public class SaveSampleDlg : MonoBehaviour
     public void OnClicked_Save()
     {
         m_SaveSample.SaveFile();
-        m_txtResult.text = "test.data에 저장 됐습니다.";
+        m_txtResult.text = "sample.data에 저장 됐습니다.";
     }
 
     public void OnClicked_Load()
