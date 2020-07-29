@@ -30,13 +30,15 @@ public class SaveInfoDlg : MonoBehaviour
 
     private void SaveTempData()
     {
-        m_kSaveInfo.m_MaxScore = 1200;
-        m_kSaveInfo.m_AccumulateScore = 17530;
-        m_kSaveInfo.m_LastStage = 3;
+        m_kSaveInfo.m_listStageScore.Clear();
 
-        m_kSaveInfo.SetStageScore(1, 1200);
-        m_kSaveInfo.SetStageScore(2, 650);
-        m_kSaveInfo.SetStageScore(3, 930);
+        m_kSaveInfo.AddStageScore(1, 1200);
+        m_kSaveInfo.AddStageScore(2, 650);
+        m_kSaveInfo.AddStageScore(3, 930);
+
+        m_kSaveInfo.m_MaxScore = 1200;
+        m_kSaveInfo.m_AccumulateScore = 2780;
+        m_kSaveInfo.m_LastStage = 3;
     }
 
 

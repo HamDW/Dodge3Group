@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveInfo 
+/*
+ * 
+ * 파일 저장 정보
+ * 
+ */
+public class SaveInfo
 {
-
     public class SStage
     {
         public int m_Stage = 0;          // 스테이지
@@ -22,7 +26,7 @@ public class SaveInfo
 
     //---------------------------------------------------
     public const string DSAVENAME = "dodge3.data";
-    
+
 
     public float m_MaxScore = 0.0f;      // 최고 점수
     public int m_AccumulateScore = 0;    // 누적 점수
@@ -31,15 +35,17 @@ public class SaveInfo
     public List<SStage> m_listStageScore = new List<SStage>();
 
     //----------------------------------------------------    
-    
+
     public void Initialize()
     {
+        LoadFile();
     }
 
-    public void SaveFile() {
+    public bool SaveFile()
+    {
 
         FileStream fs = new FileStream(DSAVENAME, FileMode.Create, FileAccess.Write);
-        if (fs == null) return;
+        if (fs == null) return false;
 
         BinaryWriter bw = new BinaryWriter(fs);
 
@@ -47,14 +53,16 @@ public class SaveInfo
 
         bw.Close();
         fs.Close();
+
+        return true;
     }
 
-    public void LoadFile()
+    public bool LoadFile()
     {
         try
         {
             FileStream fs = new FileStream(DSAVENAME, FileMode.Open, FileAccess.Read);
-            if (fs == null) return;
+            if (fs == null) return false;
 
             BinaryReader br = new BinaryReader(fs);
 
@@ -62,12 +70,15 @@ public class SaveInfo
 
             br.Close();
             fs.Close();
-        }catch(Exception e)
+
+            return true;
+        }
+        catch (Exception e)
         {
             Debug.Log("Error SaveInfo.LoadFile() - " + e.ToString());
         }
+        return false;
     }
-
 
     public void SaveData(BinaryWriter bw)
     {
@@ -75,7 +86,7 @@ public class SaveInfo
         bw.Write(m_LastStage);
         bw.Write(m_AccumulateScore);
         bw.Write(m_listStageScore.Count);
-        for( int i = 0; i < m_listStageScore.Count; i++ )
+        for (int i = 0; i < m_listStageScore.Count; i++)
         {
             SStage kStage = m_listStageScore[i];
             bw.Write(kStage.m_Stage);
@@ -90,28 +101,49 @@ public class SaveInfo
         m_MaxScore = br.ReadSingle();
         m_LastStage = br.ReadInt32();
         m_AccumulateScore = br.ReadInt32();
-        int nCount  = br.ReadInt32();
-        for( int i = 0; i < nCount; i++ )
+        int nCount = br.ReadInt32();
+        for (int i = 0; i < nCount; i++)
         {
             SStage kStage = new SStage();
             kStage.m_Stage = br.ReadInt32();
             kStage.m_Score = br.ReadInt32();
-            
+
             m_listStageScore.Add(kStage);
         }
     }
 
 
-    public void SetStageScore( int nStage, int nScore )
+    public void SetStage(int nStage)
+    {
+        m_LastStage = nStage;
+    }
+
+    private void SetMaxScore(float fScore)
+    {
+        m_MaxScore = (fScore > m_MaxScore) ? fScore : m_MaxScore;
+    }
+
+    public void AddAccumulateScore(int nScore)
+    {
+        m_AccumulateScore += nScore;
+    }
+
+    public void AddStageScore(int nStage, int nScore)
+    {
+        m_listStageScore.Add(new SStage(nStage, nStage));
+    }
+
+    public void SetStageScore(int nStage, int nScore)
     {
         SetMaxScore(nScore);
         AddAccumulateScore(nScore);
 
-        if( nStage > m_listStageScore.Count )
+        if (nStage > m_listStageScore.Count)
         {
             SStage kStage = new SStage(nStage, nScore);
             m_listStageScore.Add(kStage);
-        }else
+        }
+        else
         {
             SStage kStage = m_listStageScore[nStage - 1];
             kStage.m_Score = nScore;
@@ -122,23 +154,4 @@ public class SaveInfo
             }
         }
     }
-
-
-
-    public void SetStage(int nStage)
-    {
-        m_LastStage = nStage;
-    }
-
-
-    private void SetMaxScore(float fScore)
-    {
-        m_MaxScore = (fScore > m_MaxScore) ? fScore : m_MaxScore;
-    }
-
-    public void AddAccumulateScore( int nScore )
-    {
-        m_AccumulateScore += nScore;
-    }
-
 }
