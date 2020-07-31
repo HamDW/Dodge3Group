@@ -190,7 +190,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Play
+  m_Text: Start
 --- !u!222 &84053973
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -227,6 +227,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1071974605}
+  - {fileID: 1612967676}
   m_Father: {fileID: 193111500}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -371,9 +372,8 @@ GameObject:
   - component: {fileID: 585296452}
   - component: {fileID: 585296454}
   - component: {fileID: 585296453}
-  - component: {fileID: 585296455}
   m_Layer: 5
-  m_Name: FXTest01UI
+  m_Name: ItemObjectUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -439,22 +439,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 585296451}
   m_CullTransparentMesh: 0
---- !u!114 &585296455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 585296451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 874c49438aca4b54ca0f3245bfee21ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_txtResult: {fileID: 1330172179}
-  m_btnPlay: {fileID: 1990573611}
-  m_btnStop: {fileID: 1416089148}
-  m_FX: {fileID: 375980957578103212}
 --- !u!1 &611897142
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,8 +474,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.800003, y: 26.9}
-  m_SizeDelta: {x: -26.725372, y: -76.00699}
+  m_AnchoredPosition: {x: 2.300003, y: 17.5}
+  m_SizeDelta: {x: -16.947083, y: -57.07379}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &611897144
 MonoBehaviour:
@@ -505,7 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectColor: {r: 0.13004914, g: 0.20754719, b: 0.006852977, a: 0.5}
   m_EffectDistance: {x: 1, y: -1}
   m_UseGraphicAlpha: 1
 --- !u!114 &611897145
@@ -540,13 +524,16 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uD30C\uD2F0\uD074 \uC21C\uCC28 \uC2E4\uD589\n    1. \uD30C\uD2F0\uD074
-    \uC5EC\uB7EC\uAC8C\uB97C \uC21C\uCC28\uC801\uC73C\uB85C \n        \uC2E4\uD589\uD55C\uB2E4.\n   
-    2. \uC2E4\uD589\uC2DC \uC9C0\uC5F0\uC2DC\uAC04\uC740 min~max \n         \uC0AC\uC774\uC758
-    \uB79C\uB364\uAC12\uC774\uB2E4.\r\n    3. \uC720\uC9C0 \uC2DC\uAC04\uC774 \uC874\uC7AC
-    \uD558\uC5EC \uAC15\uC81C\uB85C \n         \uC885\uB8CC\uD560\uC218 \uC788\uB2E4.\n\n\uC704\uC758
-    \uB0B4\uC6A9\uC744 \uAC00\uC9C4 \uD084\uB798\uC2A4\uB97C \uB9CC\uB4E4\uACE0 \uC2E4\uC81C
-    \uD3ED\uD30C \uD30C\uD2F0\uD074\uC744 \uC2E4\uD589\uD558\uC790."
+  m_Text: "<b>\uC544\uC774\uD15C\uC624\uBE0C\uC81D\uD2B8 \uAD00\uB9AC\uC790</b>\n\n   
+    1. \uD2B9\uC815\uC2DC\uAC04 \uB9C8\uB2E4 \uC544\uC774\uD15C \uB79C\uB364 \n       
+    \uC0DD\uC131\uD558\uAE30\n    2. \uC720\uC9C0\uC2DC\uAC04\uB9CC\uD07C \uBCF4\uC774\uB2E4
+    \uC0AD\uC81C\uB41C\uB2E4.\n         ( =  Hide)\n    3. \uCD9C\uB825 \uC601\uC5ED\uC744
+    \uC124\uC815\uD558\uC5EC \uC601\uC5ED \n        \uB0B4\uBD80\uC5D0\uC11C \uB79C\uB364\uC704\uCE58\uB85C
+    \uCD9C\uB825\uD55C\uB2E4.\n     4. \uC544\uC774\uD15C \uC0DD\uC131\uD50C\uB798\uADF8\uAC00 
+    true\uC77C \n         \uB3D9\uC548 \uC704 \uB0B4\uC6A9\uC744 \uACC4\uC18D \uBC18\uBCF5\uD55C\uB2E4.\n    
+    5. \uC544\uC774\uD15C \uCDA9\uB3CC\uC2DC \uBC1C\uC0DD\uD560 \uC774\uD399\uD2B8\uB97C
+    \n        \uAD00\uB9AC\uD558\uACE0 Play\uC640 \uC81C\uAC70(Hide) \uD558\uAE30\n\n\uC704\uC758
+    \uB0B4\uC6A9\uC744 \uAC00\uC9C4 \uD074\uB798\uC2A4\uB97C \uB9CC\uB4DC\uC138\uC694. "
 --- !u!222 &611897146
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1449,7 +1436,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: FX Serialize
+  m_Text: 'ItemObjectMgr '
 --- !u!222 &1473485333
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1493,8 +1480,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 225, y: 66.4}
-  m_SizeDelta: {x: 324.32928, y: 289.41394}
+  m_AnchoredPosition: {x: 225, y: 35.855}
+  m_SizeDelta: {x: 324.32928, y: 350.50464}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1486292288
 MonoBehaviour:
@@ -1611,6 +1598,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537962158}
   m_CullTransparentMesh: 0
+--- !u!1 &1612967675
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1612967676}
+  m_Layer: 0
+  m_Name: Items
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1612967676
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612967675}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 188781448}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1990573609
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,18 +1817,6 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 936785217609385545}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &375980957578103212 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 592189822147284965, guid: 11444c685638d164d90ce02263b4defb,
-    type: 3}
-  m_PrefabInstance: {fileID: 936785217609385545}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c897c442a01587741ae33064bd59957f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &375980957578103213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 592189822147284964, guid: 11444c685638d164d90ce02263b4defb,
