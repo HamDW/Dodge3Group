@@ -130,7 +130,7 @@ public class SaveInfo
 
     public void AddStageScore(int nStage, int nScore)
     {
-        m_listStageScore.Add(new SStage(nStage, nStage));
+        m_listStageScore.Add(new SStage(nStage, nScore));
     }
 
     public void SetStageScore(int nStage, int nScore)
