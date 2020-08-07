@@ -9,10 +9,10 @@ public class ItemObjectMgr : MonoBehaviour
 
     //주의: 하이러키뷰에서 ItemPos 노드가 items노드의 자식에 위치해 있기때문에 
     //      LocalPosition 기준으로 움직인다.
-    public List<Transform> m_Postions =null;     // 2개를 받아 min과 max로 사용함 
+    public List<Transform> m_Positions =null;     // 2개를 받아 min과 max로 사용함 
 
-    public float m_ItemKeepTime = 2.0f;
-    public float m_ItemAppearDelay = 5.0f;
+    private float m_ItemKeepTime = 2.0f;
+    private float m_ItemAppearDelay = 5.0f;
 
     
     private bool m_bCreateItem = false;         // 아이템오브젝트 생성 여부
@@ -20,8 +20,12 @@ public class ItemObjectMgr : MonoBehaviour
 
     public void Initialize( float fKeepTime, float fItemAppearDelay)
     {
+        if (m_bCreateItem)
+            return;
+
         m_ItemKeepTime = fKeepTime;
         m_ItemAppearDelay = fItemAppearDelay;
+
         m_bCreateItem = true;
         StartCoroutine("EnumFunc_ItemCreate");
     }
@@ -108,8 +112,8 @@ public class ItemObjectMgr : MonoBehaviour
     // 아이템위치를  랜덤 위치로 만들기.
     public Vector3 MakeRamdomPos()
     {
-        Vector3 vMax = m_Postions[0].position;
-        Vector3 vMin = m_Postions[1].position;
+        Vector3 vMax = m_Positions[0].position;
+        Vector3 vMin = m_Positions[1].position;
 
         float x = Random.Range(vMin.x, vMax.x);
         float z = Random.Range(vMin.z, vMax.z);
