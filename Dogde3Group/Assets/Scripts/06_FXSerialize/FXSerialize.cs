@@ -16,15 +16,15 @@ public class FXSerialize : MonoBehaviour
     [SerializeField] float m_NextPlayDelayMin = 0.1f;       // 파티클의 화면 출력까지 간격 시간 min
     [SerializeField] float m_NextPlayDelayMax = 0.3f;       // 파티클의 화면 출력까지 간격 시간 max
     [SerializeField] bool m_AutoHide = false;               // 강제로 유지시간 이후에는 파티클 플레이 정지후 모두 숨기기
+    [SerializeField] bool m_AutoPlay = false;
 
     float m_DurationTime = 0.0f;
     int m_nCount = DMAX_COUNT;
 
-
-
     void Start()
     {
-        StartPlay();
+        if( m_AutoPlay )
+            StartPlay();
     }
 
     public void Show(bool bShow)
@@ -82,7 +82,7 @@ public class FXSerialize : MonoBehaviour
         {
             ParticleSystem kParticle = m_Particles[m_nCount];
             kParticle.gameObject.SetActive(true);               //  Play On Awake 가 체크 되어있다는 전제 하에서 사용
-            
+
             if(!kParticle.main.playOnAwake )
                 kParticle.Play();
 
