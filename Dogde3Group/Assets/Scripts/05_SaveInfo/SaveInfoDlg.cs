@@ -63,7 +63,7 @@ public class SaveInfoDlg : MonoBehaviour
     private void PrintText()
     {
         StringBuilder kBuilder = new StringBuilder();
-        kBuilder.Append(string.Format("MaxScore : {0}\n", m_kSaveInfo.m_MaxScore));
+        kBuilder.Append(string.Format("HighScore : {0}\n", m_kSaveInfo.m_MaxScore));
         kBuilder.Append(string.Format("AccumulateScore : {0}\n", m_kSaveInfo.m_AccumulateScore));
         kBuilder.Append(string.Format("LastStage : {0}\n", m_kSaveInfo.m_LastStage));
 
