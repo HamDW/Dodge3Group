@@ -96,10 +96,11 @@ public class ParserTestDlg : MonoBehaviour
         {
             TestItem kItem = m_listItem[i];
 
-            kBuilder.Append( string.Format("{0}, {1}, {2} \n", kItem.m_Id, kItem.m_Name, kItem.m_Value));
+            kBuilder.Append( string.Format("{0}, {1}, {2} \n", kItem.m_Id, kItem.m_Name, kItem.m_Value ));
         }
 
         m_txtResult.text = kBuilder.ToString();
+        
     }
 
   

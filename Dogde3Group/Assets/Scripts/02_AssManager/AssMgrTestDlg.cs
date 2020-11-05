@@ -45,7 +45,6 @@ public class AssMgrTestDlg : MonoBehaviour
         {
             AssetItem kAss = kList[i];
 
-            //string str = string.Format("{0}, {1}, {2}, {3}, {4}\n", kAss.m_id, kAss.m_nType,kAss.m_sPrefabName,kAss.m_fValue, kAss.m_sDesc);
             string str = string.Format("{0}, {1}, {2}, {3}\n", kAss.m_id, kAss.m_nType, kAss.m_sPrefabName, kAss.m_fValue);
             kBuilder.Append(str);
         }
