@@ -4,69 +4,72 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
-namespace _08_FileTest
+/* 
+  <  사용 예제   >
+    CTextFileSave kSave = new CTextFileSave();
+
+    //텍스트 파일저장 및 열기
+    kSave.SaveFile("textdata1.txt");
+    kSave.LoadFile("textdata1.txt");
+
+
+    // 바이너리 파일저장및 열기
+    kSave.SaveBinaryFile("filedata2.data");
+    kSave.LoadBinaryFile("filedata2.data");
+
+*/
+
+public class CTextFileSave
 {
+    public bool m_bCheck = false;
+    public int m_nCount = 0;
+    public float m_fValue = 0;
+    public string m_Str = "";
 
-    /* 
-      <  사용 예제   >
-        FileSave kSave = new FileSave();
-
-        //텍스트 파일저장 및 열기
-        kSave.SaveTextFile("textdata1.txt");
-        kSave.LoadTextFile("textdata1.txt");
-
-
-        // 바이너리 파일저장및 열기
-        kSave.SaveBinaryFile("filedata2.data");
-        kSave.LoadBinaryFile("filedata2.data");
-
-    */
-
-    public class FileSave
+    public void Initialize()
     {
+        m_bCheck = true;
+        m_nCount = 50;
+        m_fValue = 3.567f;
+        m_Str = "안녕하세요";
+    }
+    
+    public void SaveFile(string sPath)
+    {
+        StreamWriter fw = new StreamWriter(sPath);
+            fw.WriteLine(m_bCheck);
+            fw.WriteLine(m_nCount);
+            fw.WriteLine(m_fValue);
+            fw.WriteLine(m_Str);
+        fw.Close();
+    }
 
-        public void SaveTextFile(string sPath)
+    public void LoadFile(string sPath)
+    {
+        try
         {
-            StreamWriter fw = new StreamWriter(sPath);
-            bool bCheck = true;
-            int nCount = 50;
-            float fValue = 3.567f;
-            string str = "안녕하세요";
+            StreamReader fr = new StreamReader(sPath);
 
-                fw.WriteLine(bCheck);
-                fw.WriteLine(nCount);
-                fw.WriteLine(fValue);
-                fw.WriteLine(str);
+            string sCheck = fr.ReadLine();
+            string sCount = fr.ReadLine();
+            string sValue = fr.ReadLine();
+            string sStr = fr.ReadLine();
+            fr.Close();
 
-            fw.Close();
+            m_bCheck = bool.Parse(sCheck);
+            m_nCount = int.Parse(sCount);
+            m_fValue = float.Parse(sValue);
+            m_Str = sStr;
         }
-
-
-
-        public void LoadTextFile(string sPath)
+        catch(Exception e)
         {
-            try
-            {
-                StreamReader fr = new StreamReader(sPath);
-                bool bCheck = bool.Parse(fr.ReadLine());
-                int nCount = int.Parse(fr.ReadLine());
-                float fValue = float.Parse(fr.ReadLine());
-                string str = fr.ReadLine();
-                fr.Close();
-
-                Console.WriteLine("check = " + bCheck);
-                Console.WriteLine("count = " + nCount);
-                Console.WriteLine("value = " + fValue);
-                Console.WriteLine("str = " + str);
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            Console.WriteLine(e.ToString());
         }
+    }
 
-
+/*
         public void SaveBinaryFile(string sPath)
         {
             bool bCheck = true;
@@ -113,8 +116,8 @@ namespace _08_FileTest
                 Console.WriteLine(e.ToString());
             }
         }
+*/
 
 
-
-    }
 }
+
