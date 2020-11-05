@@ -17,7 +17,6 @@ public class SaveSample
         double d = 456789.1234;
         string str = "cafe.naver.com";
 
-
         FileStream fs = new FileStream("sample.data", FileMode.Create, FileAccess.Write);
         BinaryWriter bw = new BinaryWriter(fs);
 
