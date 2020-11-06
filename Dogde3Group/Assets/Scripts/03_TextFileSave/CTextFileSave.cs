@@ -18,7 +18,6 @@ using UnityEngine;
     // 바이너리 파일저장및 열기
     kSave.SaveBinaryFile("filedata2.data");
     kSave.LoadBinaryFile("filedata2.data");
-
 */
 
 public class CTextFileSave
