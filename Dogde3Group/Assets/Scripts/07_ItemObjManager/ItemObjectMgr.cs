@@ -4,21 +4,20 @@ using UnityEngine;
 
 public class ItemObjectMgr : MonoBehaviour
 {
-    public List<CItemObj> m_Items = null;       // 아이템 리스트, 타입별로 보관
+    //public List<CItemObj> m_Items = null;     // 아이템 리스트, 타입별로 보관
     public List<FXSerialize> m_FxList = null;   // 이펙트 리스트
 
     //주의: 하이러키뷰에서 ItemPos 노드가 items노드의 자식에 위치해 있기때문에 
     //      LocalPosition 기준으로 움직인다.
-    public List<Transform> m_Positions =null;     // 2개를 받아 min과 max로 사용함 
+    public Transform m_MinPos = null;
+    public Transform m_MaxPos = null;
 
     private float m_ItemKeepTime = 2.0f;
     private float m_ItemAppearDelay = 5.0f;
 
-    
     private bool m_bCreateItem = false;         // 아이템오브젝트 생성 여부
 
-
-    public void Initialize( float fKeepTime, float fItemAppearDelay)
+    public void Initialize(float fKeepTime, float fItemAppearDelay)
     {
         if (m_bCreateItem)
             return;
@@ -33,29 +32,25 @@ public class ItemObjectMgr : MonoBehaviour
     IEnumerator EnumFunc_ItemCreate()
     {
 
-        float fKeepTime = m_ItemKeepTime; 
-        float fDelay = m_ItemAppearDelay; 
-
-        HideItems();
-        //float fCurTime = Time.time;
+        float fKeepTime = m_ItemKeepTime;
+        float fDelay = m_ItemAppearDelay;
 
         while (m_bCreateItem)
         {
-            yield return new WaitForSeconds(fDelay-fKeepTime);
+            yield return new WaitForSeconds(fDelay - fKeepTime);
 
-            if (!m_bCreateItem)     
+            if (!m_bCreateItem)
                 break;
 
             int nAssId = 0;
             int idx = MakeRandomItemObjectID(ref nAssId) - 1;  // 오브젝트 리스트가 0부터 시작하므로 1을 뺌
-            CItemObj kItem = m_Items[idx];
+            CItemObj kItem = CreateItemObj(nAssId);
             kItem.Initialize(nAssId, MakeRamdomPos());
 
-            Debug.LogFormat("ItemPos  y = {0}", kItem.transform.localPosition.y);
+            //Debug.LogFormat("ItemPos  y = {0}", kItem.transform.localPosition.y);
 
-            //Debug.LogFormat("ItemCreate time = {0}", Time.time - fCurTime);
             yield return new WaitForSeconds(fKeepTime);
-            kItem.Show(false);
+            Destroy(kItem.gameObject);
 
             fDelay = MakeRandomDelay(m_ItemAppearDelay);
         }
@@ -74,46 +69,28 @@ public class ItemObjectMgr : MonoBehaviour
         return kAssItem.m_nType;
     }
 
-    float MakeRandomDelay( float fDelay )
+    public CItemObj CreateItemObj(int nAssId)
+    {
+        AssetItem kAssItem = AssetMgr.Inst.GetAssetItem(nAssId);
+        GameObject goPrefab = Resources.Load(kAssItem.m_sPrefabName) as GameObject;
+        GameObject go = Instantiate(goPrefab, this.transform);
+        return go.GetComponent<CItemObj>();
+    }
+
+
+    float MakeRandomDelay(float fDelay)
     {
         int nValue = Random.Range(-2, 2);
         fDelay += nValue;
         return fDelay;
     }
 
-    public void HideItems()
-    {
-        for (int i = 0; i < m_Items.Count; i++)
-        {
-            m_Items[i].Show(false);
-        }
-    }
-
-    public void SetIsCreateItem(bool bCreate)
-    {
-        m_bCreateItem = bCreate;
-    }
-
-    public void ActionEffect(int id)
-    {
-        if( id > 0 && id <= m_FxList.Count ) {
-            m_FxList[id-1].Play();
-        }
-    }
-
-    public void HideEffect(int id)
-    {
-        if (id > 0 && id <= m_FxList.Count){
-            m_FxList[id-1].Show(false);
-        }
-    }
-
 
     // 아이템위치를  랜덤 위치로 만들기.
     public Vector3 MakeRamdomPos()
     {
-        Vector3 vMax = m_Positions[0].position;
-        Vector3 vMin = m_Positions[1].position;
+        Vector3 vMax = m_MaxPos.position;
+        Vector3 vMin = m_MinPos.position;
 
         float x = Random.Range(vMin.x, vMax.x);
         float z = Random.Range(vMin.z, vMax.z);
@@ -122,5 +99,27 @@ public class ItemObjectMgr : MonoBehaviour
     }
 
 
+    public void SetIsCreateItem(bool bCreate)
+    {
+        m_bCreateItem = bCreate;
+    }
+
+    public void ActionEffect(int id)
+    {
+        if (id > 0 && id <= m_FxList.Count)
+        {
+            m_FxList[id - 1].Play();
+        }
+    }
+
+    public void HideEffect(int id)
+    {
+        if (id > 0 && id <= m_FxList.Count)
+        {
+            m_FxList[id - 1].Show(false);
+        }
+    }
+
+
+
 }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

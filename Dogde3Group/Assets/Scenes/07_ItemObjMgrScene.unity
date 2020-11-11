@@ -131,7 +131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 46090049}
   m_Layer: 0
-  m_Name: ItemPos01
+  m_Name: ItemPosMax
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -788,18 +788,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &725335939 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 185232106451006158, guid: b677b294b3a7db244b98b2719a5d6c5d,
-    type: 3}
-  m_PrefabInstance: {fileID: 211738200}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e9470f23d52e8c41b0614b825237559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &821321807
 GameObject:
   m_ObjectHideFlags: 0
@@ -1884,7 +1872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1568422466}
   m_Layer: 0
-  m_Name: ItemPos02
+  m_Name: ItemPosMin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1915,7 +1903,7 @@ GameObject:
   - component: {fileID: 1612967676}
   - component: {fileID: 1612967677}
   m_Layer: 0
-  m_Name: Items
+  m_Name: ItemMgr
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1949,15 +1937,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5461ccf7f48a44e4aac6f6bd4cb6a3d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Items:
-  - {fileID: 2089611856}
-  - {fileID: 725335939}
   m_FxList:
   - {fileID: 1342773284}
   - {fileID: 934899601}
-  m_Positions:
-  - {fileID: 46090049}
-  - {fileID: 1568422466}
+  m_MinPos: {fileID: 1568422466}
+  m_MaxPos: {fileID: 46090049}
 --- !u!1 &1990573609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2319,18 +2303,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2089611854}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2089611856 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5140496271616987566, guid: 59c7d84d797e11f4fa2de2556aa41832,
-    type: 3}
-  m_PrefabInstance: {fileID: 2089611854}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e9470f23d52e8c41b0614b825237559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!198 &126471373433396794 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 919139195143919731, guid: 11444c685638d164d90ce02263b4defb,
