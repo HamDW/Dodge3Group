@@ -660,7 +660,6 @@ MonoBehaviour:
   m_layerMask:
     serializedVersion: 2
     m_Bits: 512
-  m_jumpForce: 10
 --- !u!50 &502716804
 Rigidbody2D:
   serializedVersion: 4
