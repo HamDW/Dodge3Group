@@ -2,12 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ * 
+ * 
+ *  Animator BlendTree 연습
+ * 
+ * 
+ */
+
 public class Knight2 : MonoBehaviour
 {
     Animator m_Animator = null;
     bool m_isJump = false;
     bool m_isWalk = false;
 
+    [SerializeField] Transform m_Body = null;
     public float m_Speed = 2.0f;
 
     // Start is called before the first frame update
@@ -19,21 +29,7 @@ public class Knight2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //if( Input.GetKeyDown(KeyCode.D))
-        //{
-        //    m_Animator.SetBool("IsWalk", true);
-        //    m_isWalk = true;
-        //}
-
-        //if (Input.GetKeyUp(KeyCode.D))
-        //{
-        //    m_Animator.SetBool("IsWalk", false);
-        //    m_isWalk = false;
-        //}
-
         Update_Move();
-
 
         if( Input.GetKey(KeyCode.Space) && !m_isJump )
         {
@@ -49,9 +45,9 @@ public class Knight2 : MonoBehaviour
         {
             m_Animator.SetTrigger("attack");
         }
-
     }
 
+    // Animator Blend Tree를 이용한 이동
     public void Update_Move()
     {
         float xDir = Input.GetAxisRaw("Horizontal");
@@ -63,10 +59,18 @@ public class Knight2 : MonoBehaviour
         {
             m_isWalk = true;
             transform.Translate(vDir.normalized * m_Speed * Time.deltaTime);
+
+            // 주의 : 2D일때만 사용하자
+            #region  
+            if (xDir < 0)
+                m_Body.eulerAngles = new Vector3(0, 180, 0);   // 좌우 회전 시켜준다.( 2D 캐릭터 이므로 )
+            else
+                m_Body.eulerAngles = Vector3.zero;
+            #endregion
         }
         m_Animator.SetBool("IsWalk", m_isWalk);
-        m_Animator.SetFloat("DirX", vDir.x);
-        m_Animator.SetFloat("DirZ", vDir.z);
+        m_Animator.SetFloat("dirX", vDir.x);
+        m_Animator.SetFloat("dirZ", vDir.z);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
